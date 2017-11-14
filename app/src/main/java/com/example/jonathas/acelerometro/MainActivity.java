@@ -2,6 +2,7 @@ package com.example.jonathas.acelerometro;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -72,16 +73,33 @@ public class MainActivity extends Activity implements SensorEventListener {
         textViewY.setText("Posição Y: " + y.intValue() + " Float: " + y);
         textViewZ.setText("Posição Z: " + z.intValue() + " Float: " + z);
 
-        if(y < 0) { // O dispositivo esta de cabeça pra baixo
-            if(x > 0)
-                textViewDetail.setText("Virando para ESQUERDA ficando INVERTIDO");
-            if(x < 0)
-                textViewDetail.setText("Virando para DIREITA ficando INVERTIDO");
+
+        if (y <= 5 && y >= -5) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+        }
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+
+
+        if (y < 0) { // O dispositivo esta de cabeça pra baixo
+
+            if (x > 0){
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+            }
+
+            if (x < 0){
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+            }
         } else {
-            if(x > 0)
+
+            if (x > 0){
                 textViewDetail.setText("Virando para ESQUERDA ");
-            if(x < 0)
+            }
+
+            if (x < 0){
                 textViewDetail.setText("Virando para DIREITA ");
+            }
+
         }
     }
 }

@@ -58,6 +58,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         Float y = event.values[1];
         Float z = event.values[2];
 
+
          /*
         Os valores ocilam de -10 a 10.
         Quanto maior o valor de X mais ele ta caindo para a esquerda - Positivo Esqueda
